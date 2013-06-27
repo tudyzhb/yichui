@@ -8,5 +8,6 @@ handler500 = 'djangotoolbox.errorviews.server_error'
 urlpatterns = patterns('',
     ('^_ah/warmup$', 'djangoappengine.views.warmup'),
     (r'^admin/', include(admin.site.urls)),
+    (r'^u/', include('upload.urls')),
     ('^$', 'django.views.generic.simple.direct_to_template', {'template':'clock.html'}),
 )
