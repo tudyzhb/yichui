@@ -16,15 +16,16 @@ def upload_handler(request):
             form.save()
         return HttpResponseRedirect(view_url)
 
-    upload_url, upload_data = prepare_upload(request, view_url)
+    upload_url, upload_data = prepare_upload(request, view_url, private=False)
     form = UploadForm()
     return direct_to_template(request, 'upload/upload.html',
         {'form': form, 'upload_url': upload_url, 'upload_data': upload_data,
          'uploads': UploadModel.objects.all()})
 
 def download_handler(request, pk):
+    # print "1111", pk
     upload = get_object_or_404(UploadModel, pk=pk)
-    return serve_file(request, upload.file, save_as=True)
+    return serve_file(request, upload.file, save_as=False)
 
 def delete_handler(request, pk):
     if request.method == 'POST':

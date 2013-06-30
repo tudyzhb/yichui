@@ -1,0 +1,3 @@
+[submodule "static/ckeditor"]
+	path = static/ckeditor
+	url = git://github.com/ckeditor/ckeditor-releases.git

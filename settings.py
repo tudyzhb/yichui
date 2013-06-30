@@ -117,3 +117,15 @@ TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), 'templates'),)
 ROOT_URLCONF = 'urls'
 #print STATIC_ROOT
 #print STATICFILES_DIRS
+
+# PREPARE_UPLOAD_BACKEND = 'filetransfers.backends.default.prepare_upload'
+# SERVE_FILE_BACKEND = 'filetransfers.backends.default.serve_file'
+
+# PUBLIC_DOWNLOAD_URL_BACKEND = 'filetransfers.backends.url.public_download_url'
+
+# PUBLIC_DOWNLOAD_URL_BACKEND = 'filetransfers.backends.base_url.public_download_url'
+# PUBLIC_DOWNLOADS_URL_BASE = '/_ah/img/'
+
+# SERVE_FILE_BACKEND = 'djangoappengine.storage.serve_file'
+# PUBLIC_DOWNLOAD_URL_BACKEND = 'filetransfers.backends.base_url.public_download_url'
+# PUBLIC_DOWNLOADS_URL_BASE = '/u/'
