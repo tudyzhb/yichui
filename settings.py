@@ -87,6 +87,7 @@ INSTALLED_APPS = (
     # my app
     'filetransfers',
     'upload',
+    #'ckeditor',
 
     # djangoappengine should come last, so it can override a few manage.py commands
     'djangoappengine',
@@ -129,3 +130,5 @@ ROOT_URLCONF = 'urls'
 # SERVE_FILE_BACKEND = 'djangoappengine.storage.serve_file'
 # PUBLIC_DOWNLOAD_URL_BACKEND = 'filetransfers.backends.base_url.public_download_url'
 # PUBLIC_DOWNLOADS_URL_BASE = '/u/'
+
+#CKEDITOR_UPLOAD_PATH = "/home/jane/Documents/yichui/upload/uploadfiles"
