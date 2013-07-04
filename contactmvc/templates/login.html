@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+<div class="container">
+  <div class="row">
+    <div class="span12">
+
+<form class="form-login form-horizontal" method="post">
+  <fieldset>
+    <legend>Authentication</legend>
+
+    {% if form.non_field_errors %}
+      <div class="alert alert-error">
+        {{ form.non_field_errors }}
+      </div>
+    {% endif %}
+
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}" />
+
+    <div class="well">
+      <p>Available test accounts:</p>
+      <ul>
+        <li>username: <strong>test1</strong>, password: <strong>test1</strong></li>
+        <li>username: <strong>test2</strong>, password: <strong>test2</strong></li>
+      </ul>
+    </div>
+
+    <div class="control-group {% if form.username.errors %}error{% endif %}">
+      <label class="control-label" for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+      <div class="controls">
+        {{ form.username }}
+        <span class="help-inline">{{ form.username.errors }}</span>
+      </div>
+    </div>
+
+    <div class="control-group {% if form.password.errors %}error{% endif %}">
+      <label class="control-label" for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+      <div class="controls">
+        {{ form.password }}
+        <span class="help-inline">{{ form.password.errors }}</span>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn btn-large btn-primary" type="submit" class="btn">Log in</button>
+    </div>
+
+  </fieldset>
+</form>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

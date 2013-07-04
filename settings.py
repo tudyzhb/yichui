@@ -85,8 +85,10 @@ INSTALLED_APPS = (
     'dbindexer',
 
     # my app
+    'tastypie',
     'filetransfers',
     'upload',
+    'contactmvc',
     #'ckeditor',
 
     # djangoappengine should come last, so it can override a few manage.py commands

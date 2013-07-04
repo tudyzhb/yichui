@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     ('^_ah/warmup$', 'djangoappengine.views.warmup'),
     (r'^admin/', include(admin.site.urls)),
     (r'^u/', include('upload.urls')),
+    (r'^mvc/', include('contactmvc.urls')),
     # (r'^ckeditor/', include('ckeditor.urls')),
-    ('^$', 'django.views.generic.simple.direct_to_template', {'template':'yeequ.html'}),
+    ('^$', 'django.views.generic.simple.direct_to_template', {'template':'home.html'}),
 )

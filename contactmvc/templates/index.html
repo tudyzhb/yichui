@@ -1,0 +1,139 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ContactMVC</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.css' %}">
+  <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap-responsive.css' %}">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <script type="text/javascript">
+    var url_root = '{{ request.META.SCRIPT_NAME }}';
+  </script>
+  <script src="{% static 'vendor/jquery-1.9.1.js' %}" type="text/javascript"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.js' %}"></script>
+  <script src="{% static 'vendor/handlebars.js' %}" type="text/javascript"></script>
+  <script src="{% static 'vendor/ember-1.0.0-rc.1.js' %}" type="text/javascript"></script>
+  <script src="{% static 'vendor/ember-data.js' %}" type="text/javascript"></script>
+  <script src="{% static 'vendor/tastypie_adapter.js' %}" type="text/javascript"></script>
+  <script src="{% static 'vendor/md5.js' %}" type="text/javascript"></script>
+  <script src="{% static 'contacts.js' %}" type="text/javascript"></script>
+</head>
+<body>
+{% csrf_token %}
+{% verbatim %}
+  <script type="text/x-handlebars" data-template-name="application">
+    <div class="container">
+      <div class="page-header">
+        <h1>ContactMVC App <small>Because Todo apps are so mainstream</small></h1>
+      </div>
+      <ul class="nav nav-pills">
+        {{#linkTo contacts tagName="li"}}<a {{bindAttr href="view.href"}} href="false">Contacts</a>{{/linkTo}}</li>
+        {{#linkTo about tagName="li"}}<a {{bindAttr href="view.href"}} href="false">About</a>{{/linkTo}}</li>
+      </ul>
+    </div>
+    <div class="container">
+      {{outlet}}
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="contacts">
+    <div class="row">
+      <div class="span3">
+        <div class="well well-narrow">
+          <ul class="nav nav-list contacts-list">
+            <li class="nav-header">Actions</li>
+            {{#linkTo contacts.add tagName="li"}}
+              <a {{bindAttr href="view.href"}} href="">
+                <i class="icon-plus"></i>
+                Add a new contact
+              </a>
+            {{/linkTo}}
+            <li class="divider"></li>
+            <li class="nav-header">Contacts</li>
+            {{#each contact in controller}}
+              {{#linkTo contacts.show contact tagName="li"}}
+                <a {{bindAttr href="view.href"}} href="">
+                  <i class="icon-chevron-right"></i>
+                  <i class="icon-user"></i>
+                  {{contact.name}}
+                </a>
+              {{/linkTo}}
+            {{/each}}
+            <li class="divider"></li>
+            {% endverbatim %}
+            <li><a href="{% url 'logout' %}"><i class="icon-off"></i> Logout</a></li>
+            {% verbatim %}
+          </ul>
+        </div>
+      </div>
+      <div class="span9">
+        {{outlet}}
+      </div>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="contacts/_form">
+    <form class="form-horizontal">
+      <legend>{{headerTitle}} {{name}}</legend>
+      <div class="control-group">
+        <label class="control-label" {{bindAttr for="view.nameField.elementId"}}>Name</label>
+        <div class="controls">
+          {{view Ember.TextField valueBinding="name" placeholder="Name" viewName="nameField"}}
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" {{bindAttr for="view.emailField.elementId"}}>Email</label>
+        <div class="controls">
+          {{view Ember.TextField valueBinding="email" placeholder="Email" viewName="emailField"}}
+        </div>
+      </div>
+      <div class="form-actions">
+        <button {{action save}} class="btn btn-primary">{{buttonTitle}}</button>
+        <button {{action cancel}} class="btn">Cancel</button>
+        {{#if canDelete}}
+          <button {{action destroy}} class="btn btn-danger pull-right"><i class="icon-warning-sign icon-white"></i> Delete</button>
+        {{/if}}
+      </div>
+    </form>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="contacts/edit">
+    {{partial 'contacts/form'}}
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="contacts/show">
+    <h2><img class="img-gravatar" {{bindAttr src="gravatar"}}>{{name}}</h2>
+    <dl class="dl-horizontal">
+      <dt>Email</dt><dd>{{mailto email}}</dd>
+    </dl>
+    <div class="form-actions">
+      {{#linkTo contacts.edit content class="btn"}}<i class="icon-edit"></i> Edit{{/linkTo}}
+      <button {{action destroy}} class="btn btn-danger pull-right"><i class="icon-warning-sign icon-white"></i> Delete</button>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="contacts/add">
+    {{partial 'contacts/form'}}
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="about">
+    <p>This is a toy project build with:</p>
+    <ul>
+      <li><a href="http://emberjs.com/">Ember.js</a></li>
+      <li><a href="http://www.djangoproject.com">Django</a></li>
+      <li><a href="http://twitter.github.com/bootstrap/">Bootstrap</a></li>
+      <li><a href="http://tastypieapi.org/">Tastypie</a></li>
+      <li>and <a href="https://github.com/escalant3/ember-data-tastypie-adapter">ember-data-tastypie-adapter</a></li>
+    </ul>
+    <p>
+      The only purpose of this project is to learn <a href="http://emberjs.com/">Ember.js</a> and
+      <a href="http://tastypieapi.org/">Tastypie</a>.
+    </p>
+    <p>
+      If you have any question, feel free to <a href="mailto:laurent@deltalima.net">contact me</a>.
+    </p>
+  </script>
+{% endverbatim %}
+</body>
+</html>

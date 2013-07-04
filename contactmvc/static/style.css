@@ -1,0 +1,32 @@
+a:focus {
+    outline: none;
+}
+
+.contacts-list .icon-chevron-right {
+    float: right;
+    opacity: 0.25;
+}
+.contacts-list .active .icon-chevron-right {
+    float: right;
+    opacity: 1;
+}
+
+img.img-gravatar {
+    margin-right: 15px;
+    height: 80px;
+    width: 80px;
+}
+
+.well-narrow {
+    padding: 8px 0;
+}
+
+.form-login {
+    max-width: 300px;
+    margin: 0 auto 20px;
+    padding: 20px 30px 30px;
+}
+
+.form-login label {
+    font-weight: bold;
+}
